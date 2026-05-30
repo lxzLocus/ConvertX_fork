@@ -249,3 +249,24 @@ formConvert.addEventListener("submit", () => {
 });
 
 updateSearchBar();
+
+// クリップボードからの画像ペースト機能
+document.addEventListener("paste", (e) => {
+  const items = e.clipboardData?.items;
+  if (!items) return;
+
+  for (let item of items) {
+    if (item.type.includes("image")) {
+      e.preventDefault();
+      const blob = item.getAsFile();
+      if (!blob) continue;
+
+      const ext = item.type.split("/")[1] || "png";
+      const timestamp = new Date().getTime();
+      const newFileName = `pasted-image-${timestamp}.${ext}`;
+      const newFile = new File([blob], newFileName, { type: item.type });
+
+      handleFile(newFile);
+    }
+  }
+});

@@ -1,4 +1,11 @@
 {
   "typescript.tsdk": "node_modules/typescript/lib",
-  "typescript.enablePromptUseWorkspaceTsdk": true
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "chat.tools.terminal.autoApprove": {
+    "bun": true,
+    "/^powershell -c \"irm bun\\.sh/install\\.ps1 \\| iex\"$/": {
+      "approve": true,
+      "matchCommandLine": true
+    }
+  }
 }
